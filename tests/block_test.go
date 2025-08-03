@@ -18,6 +18,7 @@ package tests
 
 import (
 	"math/rand"
+	"strings"
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -85,6 +86,9 @@ func TestExecutionSpecBlocktests(t *testing.T) {
 	bt.skipLoad(".*prague/eip7002_el_triggerable_withdrawals/contract_deployment/system_contract_deployment.json")
 
 	bt.walk(t, executionSpecBlockchainTestDir, func(t *testing.T, name string, test *BlockTest) {
+		if !strings.Contains(name, "prague/eip7702_set_code_tx/set_code_txs/set_code_transaction_fee_validations.json/tests/prague/eip7702_set_code_tx/test_set_code_txs.py::test_set_code_transaction_fee_validations[fork_Prague-blockchain_test_from_state_test-insufficient_max_fee_per_gas]") {
+			t.Skip("for targeting test")
+		}
 		execBlockTest(t, bt, test)
 	})
 }

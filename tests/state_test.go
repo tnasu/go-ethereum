@@ -70,6 +70,9 @@ func TestState(t *testing.T) {
 		benchmarksDir,
 	} {
 		st.walk(t, dir, func(t *testing.T, name string, test *StateTest) {
+			if !strings.Contains(name, "prague/eip7702_set_code_tx/set_code_txs/set_code_transaction_fee_validations.json/tests/prague/eip7702_set_code_tx/test_set_code_txs.py::test_set_code_transaction_fee_validations[fork_Prague-blockchain_test_from_state_test-insufficient_max_fee_per_gas]") {
+				t.Skip("for targeting test")
+			}
 			execStateTest(t, st, test)
 		})
 	}
